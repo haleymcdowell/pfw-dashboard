@@ -13,7 +13,7 @@ Placeholder text for column 1
 ```{r, loadpackages}
 #| echo: false
 #| include: false
-library("tidyverse")
+library(tidyverse)
 ```
 
 ```{r, printstarwars}
