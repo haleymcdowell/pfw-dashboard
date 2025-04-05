@@ -24,7 +24,7 @@ head(starwars)
 
 ### Row {height = "10%"}
 
-Placeholder text for column 2, row 1
+Placeholder text for column 2, row 1..
 
 ### Row {height = "70%"}
 
