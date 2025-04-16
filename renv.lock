@@ -92,7 +92,8 @@
       "NeedsCompilation": "yes",
       "Author": "Brian Ripley [aut, cre, cph], Bill Venables [aut, cph], Douglas M. Bates [ctb], Kurt Hornik [trl] (partial port ca 1998), Albrecht Gebhardt [trl] (partial port ca 1998), David Firth [ctb] (support functions for polr)",
       "Maintainer": "Brian Ripley <Brian.Ripley@R-project.org>",
-      "Repository": "CRAN"
+      "Repository": "RSPM",
+      "Encoding": "UTF-8"
     },
     "Matrix": {
       "Package": "Matrix",
@@ -204,6 +205,29 @@
       "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)",
       "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
       "Repository": "CRAN"
+    },
+    "assertthat": {
+      "Package": "assertthat",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Title": "Easy Pre and Post Assertions",
+      "Authors@R": "person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", c(\"aut\", \"cre\"))",
+      "Description": "An extension to stopifnot() that makes it easy to declare  the pre and post conditions that you code should satisfy, while also  producing friendly error messages so that your users know what's gone wrong.",
+      "License": "GPL-3",
+      "Imports": [
+        "tools"
+      ],
+      "Suggests": [
+        "testthat",
+        "covr"
+      ],
+      "RoxygenNote": "6.0.1",
+      "Collate": "'assert-that.r' 'on-failure.r' 'assertions-file.r' 'assertions-scalar.R' 'assertions.r' 'base.r' 'base-comparison.r' 'base-is.r' 'base-logical.r' 'base-misc.r' 'utils.r' 'validate-that.R'",
+      "NeedsCompilation": "no",
+      "Author": "Hadley Wickham [aut, cre]",
+      "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "backports": {
       "Package": "backports",
@@ -1880,6 +1904,64 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
+    "httr2": {
+      "Package": "httr2",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Title": "Perform HTTP Requests and Process the Responses",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(\"Maximilian\", \"Girlich\", role = \"ctb\") )",
+      "Description": "Tools for creating and modifying HTTP requests, then performing them and processing the results. 'httr2' is a modern re-imagining of 'httr' that uses a pipe-based interface and solves more of the problems that API wrapping packages face.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://httr2.r-lib.org, https://github.com/r-lib/httr2",
+      "BugReports": "https://github.com/r-lib/httr2/issues",
+      "Depends": [
+        "R (>= 4.0)"
+      ],
+      "Imports": [
+        "cli (>= 3.0.0)",
+        "curl (>= 6.2.1)",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "openssl",
+        "R6",
+        "rappdirs",
+        "rlang (>= 1.1.0)",
+        "vctrs (>= 0.6.3)",
+        "withr"
+      ],
+      "Suggests": [
+        "askpass",
+        "bench",
+        "clipr",
+        "covr",
+        "docopt",
+        "httpuv",
+        "jose",
+        "jsonlite",
+        "knitr",
+        "later (>= 1.4.0)",
+        "nanonext",
+        "paws.common",
+        "promises",
+        "rmarkdown",
+        "testthat (>= 3.1.8)",
+        "tibble",
+        "webfakes",
+        "xml2"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "true",
+      "Config/testthat/start-first": "multi-req, resp-stream, req-perform",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
+      "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd], Maximilian Girlich [ctb]",
+      "Maintainer": "Hadley Wickham <hadley@posit.co>",
+      "Repository": "CRAN"
+    },
     "ids": {
       "Package": "ids",
       "Version": "1.0.1",
@@ -2874,6 +2956,45 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut] (<https://orcid.org/0000-0003-4757-117X>), Jennifer Bryan [aut, cre] (<https://orcid.org/0000-0002-6983-2759>), Posit, PBC [cph, fnd] (Copyright holder of all R code and all C/C++ code without explicit copyright attribution), Marcin Kalicinski [ctb, cph] (Author of included RapidXML code), Komarov Valery [ctb, cph] (Author of included libxls code), Christophe Leitienne [ctb, cph] (Author of included libxls code), Bob Colbert [ctb, cph] (Author of included libxls code), David Hoerl [ctb, cph] (Author of included libxls code), Evan Miller [ctb, cph] (Author of included libxls code)",
       "Maintainer": "Jennifer Bryan <jenny@posit.co>",
+      "Repository": "CRAN"
+    },
+    "rebird": {
+      "Package": "rebird",
+      "Version": "1.3.0",
+      "Source": "Repository",
+      "Title": "R Client for the eBird Database of Bird Observations",
+      "Description": "A programmatic client for the eBird database  (<https://ebird.org/home>), including functions for searching for bird  observations by geographic location (latitude, longitude), eBird  hotspots, location identifiers, by notable sightings, by region, and by  taxonomic name.",
+      "Depends": [
+        "R (>= 2.10)"
+      ],
+      "License": "MIT + file LICENSE",
+      "Authors@R": "c( person(\"Rafael\", \"Maia\", role = \"aut\", email = \"rm72@zips.uakron.edu\"), person(\"Scott\", \"Chamberlain\", role = \"aut\", email = \"myrmecocystus@gmail.com\", comment = c(ORCID = \"0000-0003-1444-9135\")), person(\"Andy\", \"Teucher\", role = \"aut\", email = \"andy.teucher@gmail.com\"),  person(\"Guy\", \"Babineau\", role = \"ctb\", email = \"guy.babineau@gmail.com\"), person(\"Marianna\", \"Foos\", role = \"ctb\", email = \"marianna.foos@gmail.com\"), person(\"David\", \"Bradnum\", role = \"ctb\", email = \"david.bradnum@gmail.com\"), person(\"Sebastian\", \"Pardo\", role = c(\"aut\", \"cre\"), email = \"sebpardo@gmail.com\", comment = c(ORCID = \"0000-0002-4147-5796\")) )",
+      "URL": "https://docs.ropensci.org/rebird/, https://github.com/ropensci/rebird",
+      "BugReports": "https://github.com/ropensci/rebird/issues",
+      "VignetteBuilder": "knitr",
+      "Imports": [
+        "methods",
+        "utils",
+        "stats",
+        "httr (>= 1.0.0)",
+        "jsonlite",
+        "dplyr",
+        "assertthat"
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown",
+        "testthat",
+        "covr"
+      ],
+      "RoxygenNote": "7.1.1",
+      "X-schema.org-applicationCategory": "Data Access",
+      "X-schema.org-keywords": "birds, birding, ebird, database, data, biology, observations, sightings, ornithology",
+      "X-schema.org-isPartOf": "https://ropensci.org",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "no",
+      "Author": "Rafael Maia [aut], Scott Chamberlain [aut] (<https://orcid.org/0000-0003-1444-9135>), Andy Teucher [aut], Guy Babineau [ctb], Marianna Foos [ctb], David Bradnum [ctb], Sebastian Pardo [aut, cre] (<https://orcid.org/0000-0002-4147-5796>)",
+      "Maintainer": "Sebastian Pardo <sebpardo@gmail.com>",
       "Repository": "CRAN"
     },
     "rematch": {

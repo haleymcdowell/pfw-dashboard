@@ -2,7 +2,9 @@ on:
   workflow_dispatch:
   push:
     branches: main
-
+  schedule:
+    - cron '0 0 * * *'
+    
 name: Quarto Publish
 
 jobs:
@@ -33,3 +35,4 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          api_key: ${{ secrets.API_KEY }}

@@ -14,21 +14,82 @@ Placeholder text for column 1
 #| echo: false
 #| include: false
 library(tidyverse)
+library(httr2)
+
+
+
 ```
 
-```{r, printstarwars}
-head(starwars)
+
+```{r, getrecentobservations}
+
+#Define ebird API key.
+api_key <- Sys.getenv("api_key")
+
+#headers = c(
+#  'X-eBirdApiToken' = api_key
+#)
+
+#res <- VERB("GET", url = "https://api.ebird.org/v2/data/obs/KZ/recent", add_headers(headers))
+
+#cat(content(res, 'text'))
+
+recent_obs <- request("https://api.ebird.org/v2/data/obs/KZ/recent") |> 
+  req_headers(
+    `X-eBirdApiToken` = api_key,
+  ) |> 
+  req_perform() |>
+  resp_body_json()
+
+#Create dataframe of recent observations.
+recent_obs_df <- data.frame(
+  common_name = unlist(lapply(recent_obs, FUN = function(x) {x$comName})),
+  sub_id = unlist(lapply(recent_obs, FUN = function(x) {x$subId})),
+  species_code = unlist(lapply(recent_obs, FUN = function(x) {x$speciesCode})),
+  loc_name = unlist(lapply(recent_obs, FUN = function(x) {x$locName}))
+)
+
 ```
 
 ## Column {width = "65%"}
 
 ### Row {height = "10%"}
 
-Placeholder text for column 2, row 1..
+```{r, sendtoojs}
+#| echo: false
+#| include: false
+
+ojs_define(recent_obs_ojs = recent_obs_df)
+```
+
+```{ojs}
+//| expandable: false
+
+// Transpose the data to make it usable in ojs.
+recent_observations = transpose(recent_obs_ojs)
+
+// Create a dropdown menu of the species common name.
+viewof nameDropdown = Inputs.select(
+  recent_observations.map(d => d.common_name),
+  {
+    label: "Choose a species",
+    unique: true
+    }
+)
+```
+
 
 ### Row {height = "70%"}
 
-Placeholder text for column 2, row 2
+```{ojs, embedHTML}
+html`<iframe 
+  width="100%" 
+  height="800" 
+  loading="lazy"
+  src="https://ebird.org/species/${recent_observations.find(d => d.common_name === nameDropdown)?.species_code || 'gretit1'}">
+</iframe>`
+```
+
 
 ### Row {height = "20%"}
 
