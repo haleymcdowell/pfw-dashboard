@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -74,6 +108,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="ojs-define">
+{"contents":[{"name":"recent_obs_ojs","value":{"common_name":["Common Myna","Great Tit","Eurasian Magpie","Gray-crowned Goldfinch","Eurasian Blackbird","Common Wood-Pigeon","Ruddy Shelduck","Tree Pipit","Song Thrush","Bluethroat","Northern Lapwing","Common Chaffinch","Common Chiffchaff","Mallard","Common Redstart","Lesser Black-backed Gull","White Wagtail","Eurasian Jackdaw","Western Yellow Wagtail","Caspian Gull","Baillon's Crake","Purple Heron","Western House-Martin","European Red-rumped Swallow","Common Tern","European Greenfinch","Fieldfare","Green Sandpiper","House Sparrow","Hooded Crow","Citrine Wagtail","Black Kite","Eurasian Tree Sparrow","Eared Grebe","Common Kingfisher","Rock Pigeon","Great Cormorant","Great Crested Grebe","Common Sandpiper","Lesser Whitethroat","Common Swift","Little Ringed Plover","Common Snipe","Eurasian Skylark","Black-headed Gull","Gray Heron","Eurasian Kestrel","Barn Swallow","Meadow Pipit","Redwing","Great Spotted Woodpecker","Ruff","Greater Flamingo","Whinchat","Eurasian Hoopoe","Gull-billed Tern","Dunlin","Bank Swallow","Western Marsh Harrier","Glossy Ibis","Carrion Crow","Black-winged Stilt","Long-legged Buzzard","European Starling","Mute Swan","Northern Wheatear","Gray Wagtail","Azure Tit","Blue-capped Redstart","Common Buzzard","Imperial Eagle","Common Crane","Eurasian Curlew","Siberian Stonechat","Short-eared Owl","Gadwall","Isabelline Wheatear","Northern Shoveler","Yellowhammer","Eurasian Collared-Dove","Eurasian Oystercatcher","Graylag Goose","Greater White-fronted Goose","Common Gull","Red-breasted Goose","Eurasian Coot","Great Egret","Bearded Reedling","Water Rail","Garganey","Red-crested Pochard","Tufted Duck","Green-winged Teal","Pallas's Gull","Turkestan Short-toed Lark","Reed Bunting","Great White Pelican","Northern Pintail","Paddyfield Warbler","Eurasian Scops-Owl","Willow Warbler","Common Pochard","Rook","Desert Finch","Greater Short-toed Lark","Crested Lark","Pied Wheatear","Whooper Swan","Slender-billed Gull","Black Redstart","European Pied Flycatcher","Chukar","Finsch's Wheatear","Rock Sparrow","Kentish Plover","Common Shelduck","Common Redshank","Caspian Tern","Lesser White-fronted Goose","Eurasian Sparrowhawk","Eurasian Penduline-Tit","Ring-necked Pheasant","Eurasian Wigeon","Ferruginous Duck","White-tailed Eagle","Black-throated Thrush","Dalmatian Pelican","Isabelline Shrike","Corn Bunting","Little Bustard","White-headed Duck","Eurasian Moorhen","Merlin","Black-tailed Godwit","Collared Pratincole","Pied Avocet","Red-tailed Shrike","Cetti's Warbler","Calandra Lark","Moustached Warbler","Common Greenshank","Wood Sandpiper","Arctic Loon","Eurasian Spoonbill","Laughing Dove","Jack Snipe","Pallid Harrier","Common Raven","Gray Partridge","White-winged Lark","Eurasian Siskin","Long-eared Owl","Steppe Eagle","Bohemian Waxwing","Red-necked Phalarope","Marsh Sandpiper","Little Grebe","White-tailed Lapwing","Sandwich Tern","European Turtle-Dove","Whimbrel","Long-tailed Tit","Great Gray Shrike","Greater Scaup","Red-necked Grebe","Blue Whistling-Thrush","Saxaul Sparrow","Cinereous Vulture","Booted Eagle","Desert Wheatear","Yellow-billed Chough","Rosy Starling","Alpine Accentor","Long-tailed Shrike","Plain Mountain Finch","Coal Tit","Golden Eagle","Black-bellied Sandgrouse","Mistle Thrush","Black-crowned Night Heron","Brambling","Eurasian Thick-knee","European Robin","Hawfinch","Willow Tit","Tundra Swan","Demoiselle Crane"],"sub_id":["S225830950","S225830950","S225830950","S225830950","S225830950","S225830950","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827081","S225827237","S225827237","S225827237","S225827237","S225827237","S225827237","S225827237","S225796396","S225796396","S225756751","S225756751","S225756751","S225756751","S225852868","S225852868","S225756751","S225756751","S225756751","S225756751","S225756751","S225756751","S225756751","S225756751","S225560297","S225560297","S225560297","S225560297","S225560297","S225560297","S225560297","S225560297","S225544538","S225544538","S225494090","S225494090","S225494090","S225494090","S225494090","S225494090","S225494090","S225494090","S225494090","S225503001","S225474733","S225474733","S225474733","S225474733","S225474733","S225477881","S225477881","S225477881","S225462153","S225462153","S225459497","S225459497","S225459497","S225459497","S225459497","S225459497","S225459497","S225452285","S225452285","S225452285","S225452285","S225452285","S225452285","S225452285","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225523187","S225450616","S225212585","S225151857","S225151857","S225151857","S225116806","S225116806","S225116806","S225116806","S225187582","S225124877","S225124877","S225124877","S225124877","S225124877","S225124877","S225124877","S225124877","S225124877","S225124877","S225088831","S225088831","S225088831","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225877595","S225079662","S224801100","S224760886","S224760886","S224756677","S224729667","S224502926","S224542306","S224495608","S224495608","S224539448","S224253606","S224233635","S224231485","S224066082","S224054416","S224054416","S224054416","S224054416","S224023000","S224017609","S224009721","S223841464","S223801536","S223623380","S223623380","S225153070","S225153070","S225116933","S223699235","S223593381","S225160664","S225160664","S225160664","S225160664","S225160664","S225160664","S225153301","S225117024","S223055772","S223062778","S223471321","S222830443","S222779564","S222779564","S222609742","S222580064","S222394170"],"species_code":["commyn","gretit1","eurmag1","eurgol2","eurbla","cowpig1","rudshe","trepip","sonthr1","blueth","norlap","comcha","comchi1","mallar3","comred2","lbbgul","whiwag","eurjac","eaywag1","casgul2","baicra1","purher1","comhom1","rerswa8","comter","eurgre1","fieldf","grnsan","houspa","hoocro1","citwag","blakit1","eutspa","eargre","comkin1","rocpig","grecor","grcgre1","comsan","leswhi4","comswi","lirplo","comsni","skylar","bkhgul","graher1","eurkes","barswa","meapip1","redwin","grswoo","ruff","grefla3","whinch1","hoopoe","gubter2","dunlin","banswa","wemhar1","gloibi","carcro1","bkwsti","lolbuz1","eursta","mutswa","norwhe","grywag","azutit2","bucred1","combuz1","impeag1","comcra","eurcur","sibsto1","sheowl","gadwal","isawhe1","norsho","yellow2","eucdov","euroys1","gragoo","gwfgoo","mewgul","rebgoo1","eurcoo","greegr","bearee1","watrai1","gargan","recpoc","tufduc","gnwtea","gbhgul2","tstlar1","reebun","grwpel1","norpin","padwar1","eursco1","wlwwar","compoc","rook1","desfin2","gstlar1","crelar1","piewhe1","whoswa","slbgul1","blared1","eupfly1","chukar","finwhe1","rocpet1","kenplo1","comshe","comred1","caster1","lwfgoo","eurspa1","euptit1","rinphe1","eurwig","ferduc","whteag","datthr1","dalpel1","isashr1","corbun1","litbus1","whhduc1","commoo3","merlin","bktgod","colpra","pieavo1","rutshr2","cetwar1","callar1","mouwar1","comgre","woosan","arcloo","eurspo1","laudov1","jacsni","palhar1","comrav","grypar","whwlar1","eursis","loeowl","steeag1","bohwax","renpha","marsan","litgre1","whtlap1","santer1","eutdov","whimbr","lottit1","norshr1","gresca","rengre","blwthr1","saxspa1","cinvul1","booeag1","deswhe1","yebcho1","rossta2","alpacc1","lotshr1","plmfin1","coatit2","goleag","blbsan1","misthr1","bcnher","brambl","eutkne1","eurrob1","hawfin","wiltit1","tunswa","demcra1"],"loc_name":["Shybynsay","Shybynsay","Shybynsay","Shybynsay","Shybynsay","Shybynsay","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","15 mkr. zhagalau","15 mkr. zhagalau","15 mkr. zhagalau","15 mkr. zhagalau","15 mkr. zhagalau","15 mkr. zhagalau","15 mkr. zhagalau","Петропавловск, Северо-Казахстанская область, KZ (54,856, 69,14). Парк Первого Президента Республики Казахстан","Петропавловск, Северо-Казахстанская область, KZ (54,856, 69,14). Парк Первого Президента Республики Казахстан","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Victory Park, Petropavl","Victory Park, Petropavl","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Aktau--Rock Beach №3","Петропавловск, Северо-Казахстанская область, KZ (54,856, 69,14). Парк Первого Президента Республики Казахстан","Петропавловск, Северо-Казахстанская область, KZ (54,856, 69,14). Парк Первого Президента Республики Казахстан","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Kanal na Karakol","Namaste Shalle--General Area","Kulsary","Kulsary","Kulsary","Kulsary","Kulsary","Almaty--Medeu Stadium Area","Almaty--Medeu Stadium Area","Almaty--Medeu Stadium Area","Р-265, Костанайская область, KZ (52,078, 64,272)","Р-265, Костанайская область, KZ (52,078, 64,272)","Р-284, Костанайская область, KZ (51,689, 64,279)","Р-284, Костанайская область, KZ (51,689, 64,279)","Р-284, Костанайская область, KZ (51,689, 64,279)","Р-284, Костанайская область, KZ (51,689, 64,279)","Р-284, Костанайская область, KZ (51,689, 64,279)","Р-284, Костанайская область, KZ (51,689, 64,279)","Р-284, Костанайская область, KZ (51,689, 64,279)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","North part of the Karakol lake, Aqtau","15 mkr. zhagalau","Almaty, Almaty, KZ (43.215, 76.971)","Kopzhasar v., Batıs Qazaqstan oblısı, KZ","Kopzhasar v., Batıs Qazaqstan oblısı, KZ","Kopzhasar v., Batıs Qazaqstan oblısı, KZ","Kyzemshek Village","Kyzemshek Village","Kyzemshek Village","Kyzemshek Village","Lake Solennoye","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Жыланды муйс","Bird's Monitoring Station","Bird's Monitoring Station","Bird's Monitoring Station","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Lake Sorbulak--General Area; (IBA KZ097)","Zhanaozen – South Part of Lake Otstoinik, Mangystau Region, KZ (43,335, 52,808)","Kanal na Karakol","Shagala 1 mkr","Shagala 1 mkr","WTF 7","Almaty--General Area","15 mkr. zhagalau","Beriktas--General Area","R-265, Талапкер, Қостанай облысы, KZ (53,058, 63,723)","R-265, Талапкер, Қостанай облысы, KZ (53,058, 63,723)","Таңбалы тас (Tamgaly-Tas)","Park Pestroye","Bird's Monitoring Station","Auto selected 46.01668, 53.48823","Karat","Kuryk - otstoinik","Kuryk - otstoinik","Kuryk - otstoinik","Kuryk - otstoinik","Shagala 1 mkr","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Aktau--Sand Beach 2","Voroniy Ostrov","Korolev","Wtf","Wtf","Kaindy Lake","Kaindy Lake","Туркестанская область, KZ (45,079, 68,504)","Sovjetskoe, Turkistan Region, KZ (42,475, 69,634)","Kedendyk","Saty village","Saty village","Saty village","Saty village","Saty village","Saty village","Auto selected 43.35452, 79.05461","Betpakdala--Artesian Well Shapshur","Baiterek district","Kanal na Karakol","Khanskaya Roshcha","14-15 Mkr. Zhagalau","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Pine-tree Lush near Pestroye Lake","Улица Абылайхана, Докучаевка, Костанайская область, KZ (51,65, 64,227)","Karamendy, N.Sagadieva street"]}}]}
+</script>
 
 
 </head>
@@ -108,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
 <div class="card bslib-card html-fill-container" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-body html-fill-item html-fill-container">
 <p>Placeholder text for column 1</p>
@@ -119,47 +158,53 @@ grid-auto-rows: minmax(0, 1fr);">
         <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
     </span>
 </bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="sourceCode cell-code hidden html-fill-item html-fill-container" id="cb1" data-startfrom="69" data-source-offset="-49"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>recent_observations <span class="op">=</span> <span class="fu">transpose</span>(recent_obs_ojs)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="co">// Create a dropdown menu of the species common name.</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>viewof nameDropdown <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  recent_observations<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">common_name</span>)<span class="op">,</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Choose a species"</span><span class="op">,</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unique</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display html-fill-item html-fill-container">
+<div class="html-fill-item html-fill-container">
+<div id="ojs-cell-1-1" data-nodetype="declaration" class="html-fill-item html-fill-container">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display html-fill-item html-fill-container">
+<div class="html-fill-item html-fill-container">
+<div id="ojs-cell-1-2" data-nodetype="declaration" class="html-fill-item html-fill-container">
+
+</div>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
 <div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-body html-fill-item html-fill-container">
-<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
-<pre><code># A tibble: 6 × 14
-  name      height  mass hair_color skin_color eye_color birth_year sex   gender
-  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…
-2 C-3PO        167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…
-3 R2-D2         96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…
-4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
-5 Leia Org…    150    49 brown      light      brown           19   fema… femin…
-6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
-# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
-#   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<div class="sourceCode cell-code hidden html-fill-item html-fill-container" id="cb2" data-startfrom="84" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 83;"><span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;iframe </span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="vs">  width="100%" </span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="vs">  height="800" </span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="vs">  loading="lazy"</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="vs">  src="https://ebird.org/species/</span><span class="sc">${</span>recent_observations<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">common_name</span> <span class="op">===</span> nameDropdown)<span class="op">?.</span><span class="at">species_code</span> <span class="op">||</span> <span class="st">'gretit1'</span><span class="sc">}</span><span class="vs">"&gt;</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/iframe&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display html-fill-item html-fill-container">
+<div id="ojs-cell-2" data-nodetype="expression" class="html-fill-item html-fill-container">
+
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
-</div><div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, max-content) minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
-<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div class="card bslib-card html-fill-container" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-body html-fill-item html-fill-container">
-<p>Placeholder text for column 2, row 1..</p>
-</div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
-</div>
-<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div class="card bslib-card html-fill-container" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-body html-fill-item html-fill-container">
-<p>Placeholder text for column 2, row 2</p>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
     <template>Expand</template>
@@ -187,6 +232,17 @@ grid-auto-rows: minmax(0, 1fr);">
 </div>
 
 
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuLy8gVHJhbnNwb3NlIHRoZSBkYXRhIHRvIG1ha2UgaXQgdXNhYmxlIGluIG9qcy5cbnJlY2VudF9vYnNlcnZhdGlvbnMgPSB0cmFuc3Bvc2UocmVjZW50X29ic19vanMpXG5cbi8vIENyZWF0ZSBhIGRyb3Bkb3duIG1lbnUgb2YgdGhlIHNwZWNpZXMgY29tbW9uIG5hbWUuXG52aWV3b2YgbmFtZURyb3Bkb3duID0gSW5wdXRzLnNlbGVjdChcbiAgcmVjZW50X29ic2VydmF0aW9ucy5tYXAoZCA9PiBkLmNvbW1vbl9uYW1lKSxcbiAge1xuICAgIGxhYmVsOiBcIkNob29zZSBhIHNwZWNpZXNcIixcbiAgICB1bmlxdWU6IHRydWVcbiAgICB9XG4pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYDxpZnJhbWUgXG4gIHdpZHRoPVwiMTAwJVwiIFxuICBoZWlnaHQ9XCI4MDBcIiBcbiAgbG9hZGluZz1cImxhenlcIlxuICBzcmM9XCJodHRwczovL2ViaXJkLm9yZy9zcGVjaWVzLyR7cmVjZW50X29ic2VydmF0aW9ucy5maW5kKGQgPT4gZC5jb21tb25fbmFtZSA9PT0gbmFtZURyb3Bkb3duKT8uc3BlY2llc19jb2RlIHx8ICdncmV0aXQxJ31cIj5cbjwvaWZyYW1lPmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbmFtZURyb3Bkb3duJykifV19
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
