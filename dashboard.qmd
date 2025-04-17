@@ -15,7 +15,7 @@ Placeholder text for column 1
 #| include: false
 library(tidyverse)
 library(httr2)
-
+library(gt)
 
 
 ```
@@ -34,7 +34,7 @@ api_key <- Sys.getenv("api_key")
 
 #cat(content(res, 'text'))
 
-recent_obs <- request("https://api.ebird.org/v2/data/obs/KZ/recent") |> 
+recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI/recent") |> 
   req_headers(
     `X-eBirdApiToken` = api_key,
   ) |> 
@@ -46,10 +46,24 @@ recent_obs_df <- data.frame(
   common_name = unlist(lapply(recent_obs, FUN = function(x) {x$comName})),
   sub_id = unlist(lapply(recent_obs, FUN = function(x) {x$subId})),
   species_code = unlist(lapply(recent_obs, FUN = function(x) {x$speciesCode})),
+  obs_date = unlist(lapply(recent_obs, FUN = function(x) {x$obsDt})),
   loc_name = unlist(lapply(recent_obs, FUN = function(x) {x$locName}))
 )
 
 ```
+
+```{r, createtable}
+recent_obs_df |>
+  select(common_name, obs_date, loc_name) |>
+  gt() |>
+  cols_label(
+    common_name = md("**Common Name**"),
+    obs_date = md("**Date**"),
+    loc_name = ""
+  )
+  
+```
+
 
 ## Column {width = "65%"}
 
@@ -81,16 +95,21 @@ viewof nameDropdown = Inputs.select(
 
 ### Row {height = "70%"}
 
-```{ojs, embedHTML}
-html`<iframe 
-  width="100%" 
-  height="800" 
-  loading="lazy"
-  src="https://ebird.org/species/${recent_observations.find(d => d.common_name === nameDropdown)?.species_code || 'gretit1'}">
-</iframe>`
+```{ojs}
+html `<iframe src="https://www.macaulaylibrary.org/?_gl=1%2A1vjak5l%2A_gcl_au%2AODM3MjQyMzkyLjE3NDQ3NjkyNzg.%2A_ga%2AOTQwOTMwNTgxLjE3NDQ3NjkyNzg.%2A_ga_QR4NVXZ8BM%2AMTc0NDg1MTMxMS40LjEuMTc0NDg1MTc4Ny42MC4wLjA.&_ga=2.179530598.338990690.1744769278-940930581.1744769278" height="536" width="640" frameborder="0" allowfullscreen></iframe>`
 ```
 
 
 ### Row {height = "20%"}
+```{ojs, embedHTML}
+html`<iframe style="border-radius:12px"
+  src=${`https://ebird.org/species/${recent_observations.find(name => name.common_name === nameDropdown).species_code}?`}
+  width="100%"
+  height="352"
+  frameborder="0"
+  loading="lazy"
+  sandbox="allow-same-origin">
+</iframe>`
 
+```
 Placeholder text for column 2, row 3
