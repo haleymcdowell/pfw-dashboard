@@ -10,7 +10,7 @@ website:
       - href: about.qmd
         text: About
       - href: dashboard.qmd
-        text: Dashboard
+        text: Recent Sightings Dashboard
 
 format:
   html:

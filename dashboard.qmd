@@ -1,14 +1,12 @@
 ---
-title: "Exploring Birds of North America"
+title: "Recent Sightings in Genesee County, Michigan"
 format: 
   dashboard:
     logo: "images/logo.png"
     orientation: columns
 ---
 
-## Column {width = "35%"}
-
-Placeholder text for column 1
+## Column1 {width = "35%"}
 
 ```{r, loadpackages}
 #| echo: false
@@ -16,8 +14,9 @@ Placeholder text for column 1
 library(tidyverse)
 library(httr2)
 library(gt)
-
-
+library(jsonlite)
+library(ggplot2)
+library(reshape2)
 ```
 
 
@@ -26,90 +25,150 @@ library(gt)
 #Define ebird API key.
 api_key <- Sys.getenv("api_key")
 
-#headers = c(
-#  'X-eBirdApiToken' = api_key
-#)
-
-#res <- VERB("GET", url = "https://api.ebird.org/v2/data/obs/KZ/recent", add_headers(headers))
-
-#cat(content(res, 'text'))
-
-recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI/recent") |> 
+#API Call
+recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI-049/recent") |> 
   req_headers(
     `X-eBirdApiToken` = api_key,
   ) |> 
   req_perform() |>
   resp_body_json()
 
-#Create dataframe of recent observations.
-recent_obs_df <- data.frame(
-  common_name = unlist(lapply(recent_obs, FUN = function(x) {x$comName})),
-  sub_id = unlist(lapply(recent_obs, FUN = function(x) {x$subId})),
-  species_code = unlist(lapply(recent_obs, FUN = function(x) {x$speciesCode})),
-  obs_date = unlist(lapply(recent_obs, FUN = function(x) {x$obsDt})),
-  loc_name = unlist(lapply(recent_obs, FUN = function(x) {x$locName}))
-)
+# Create dataframe of recent observations.
+recent_obs_df <- as.data.frame(do.call(rbind, recent_obs))
 
+# Convert lists to vectors
+recent_obs_df <- 
+  recent_obs_df |>
+  mutate(speciesCode = as.vector(unlist(recent_obs_df$speciesCode))) |>
+  mutate(comName = as.vector(unlist(recent_obs_df$comName))) |>
+  mutate(sciName = as.vector(unlist(recent_obs_df$sciName))) |>
+  mutate(locId = as.vector(unlist(recent_obs_df$locId))) |>
+  mutate(locName = as.vector(unlist(recent_obs_df$locName))) |>
+  mutate(obsDt = as.vector(unlist(recent_obs_df$obsDt))) |>
+  mutate(howMany = as.vector(unlist(recent_obs_df$howMany))) |>
+  mutate(speciesCode = as.vector(unlist(recent_obs_df$speciesCode))) |>
+  mutate(lat = as.vector(unlist(recent_obs_df$lat))) |>
+  mutate(lng = as.vector(unlist(recent_obs_df$lng))) |>
+  mutate(obsValid = as.vector(unlist(recent_obs_df$obsValid))) |>
+  mutate(obsReviewed = as.vector(unlist(recent_obs_df$obsReviewed))) |>
+  mutate(locationPrivate = as.vector(unlist(recent_obs_df$locationPrivate))) |>
+  mutate(subId = as.vector(unlist(recent_obs_df$subId))) |>
+  mutate(exoticCategory = as.vector(unlist(recent_obs_df$exoticCategory)))
 ```
 
 ```{r, createtable}
+# Create dashboard table
 recent_obs_df |>
-  select(common_name, obs_date, loc_name) |>
+  select(comName, obsDt, locName, howMany) |>
   gt() |>
   cols_label(
-    common_name = md("**Common Name**"),
-    obs_date = md("**Date**"),
-    loc_name = ""
+    comName = md("**Common Name**"),
+    obsDt = md("**Date**"),
+    locName = md("**Location**"),
+    howMany = md("**Number Seen**")
   )
   
 ```
 
 
-## Column {width = "65%"}
+## Column2 {width = "65%"}
 
 ### Row {height = "10%"}
 
 ```{r, sendtoojs}
 #| echo: false
 #| include: false
-
 ojs_define(recent_obs_ojs = recent_obs_df)
 ```
 
 ```{ojs}
 //| expandable: false
-
 // Transpose the data to make it usable in ojs.
 recent_observations = transpose(recent_obs_ojs)
 
 // Create a dropdown menu of the species common name.
-viewof nameDropdown = Inputs.select(
-  recent_observations.map(d => d.common_name),
+viewof locNameDropdown = Inputs.select(
+  recent_observations.map(d => d.locName),
   {
-    label: "Choose a species",
+    label: "Choose a location",
     unique: true
     }
 )
 ```
 
-
-### Row {height = "70%"}
+### Row {.fill}
 
 ```{ojs}
-html `<iframe src="https://www.macaulaylibrary.org/?_gl=1%2A1vjak5l%2A_gcl_au%2AODM3MjQyMzkyLjE3NDQ3NjkyNzg.%2A_ga%2AOTQwOTMwNTgxLjE3NDQ3NjkyNzg.%2A_ga_QR4NVXZ8BM%2AMTc0NDg1MTMxMS40LjEuMTc0NDg1MTc4Ny42MC4wLjA.&_ga=2.179530598.338990690.1744769278-940930581.1744769278" height="536" width="640" frameborder="0" allowfullscreen></iframe>`
+//| expandable: false
+
+  filtered_loc = recent_observations.filter(function(locName) {
+  return locNameDropdown.includes(locName.locNameDropdown);
+ })
+
+Plot.plot({
+  marks: [
+  Plot.barX(
+  filtered_loc,
+  {x: "howMany", y: "comName", sort:{y: "x", reverse: true}})
+  ],
+  marginLeft: 200,
+  filter: d => locNameDropdown.includes(d.locName)
+})
 ```
 
 
-### Row {height = "20%"}
-```{ojs, embedHTML}
-html`<iframe style="border-radius:12px"
-  src=${`https://ebird.org/species/${recent_observations.find(name => name.common_name === nameDropdown).species_code}?`}
-  width="100%"
-  height="352"
-  frameborder="0"
-  loading="lazy"
-  sandbox="allow-same-origin">
-</iframe>`
-
+```{r, plot}
+# recent_obs_df_loc <- recent_obs_df |>
+#   filter(locName == chosen_loc)
+# 
+# ggplot(recent_obs_df_loc, aes(x = comName, y = howMany)) +
+# geom_boxplot()
 ```
-Placeholder text for column 2, row 3
+```{r}
+#| content: valuebox
+#| title: "Number Seen per day"
+# list(
+#   icon = "trash",
+#   color = "danger",
+#   value = recent_obs_df |>
+#               filter(recent_obs_df$comName == "American Robin") |>
+#               select(7)
+# )
+```
+
+
+```{r}
+# html `<iframe style="border-radius:12px; display: flex; justify-content: center; align-items: center;" 
+# src="https://www.macaulaylibrary.org/?_gl=1%2A1vjak5l%2A_gcl_au%2AODM3MjQyMzkyLjE3NDQ3NjkyNzg.%2A_ga%2AOTQwOTMwNTgxLjE3NDQ3NjkyNzg.%2A_ga_QR4NVXZ8BM%2AMTc0NDg1MTMxMS40LjEuMTc0NDg1MTc4Ny42MC4wLjA.&_ga=2.179530598.338990690.1744769278-940930581.1744769278" 
+# height="1000" 
+# width="100%" 
+# frameborder="0" 
+# allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+# loading="lazy"
+# allowfullscreen
+# title="Macaulay Library">
+# </iframe>`
+```
+
+```{r, embedHTML}
+# html`<iframe class="custom-iframe" style="border-radius:12px; display: flex; justify-content: center; align-items: center;"
+# src=${`https://ebird.org/species/${recent_observations.find(name => name.common_name === nameDropdown).species_code}?`}
+# width="100%"
+# height="352"
+# frameborder="0"
+# loading="lazy"
+# allowfullscreen=""
+# allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+# </iframe>`
+```
+
+### Row {height = "10%"}
+:::{.card expandable="false"}
+<div style="background-color: #333; color: white; border-radius: 10px; padding: 10px; text-align: center; display: flex; align-items: center; justify-content: center; height: 100%;">
+
+  <span style="font-size: 1vw; width: 100%;">
+    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Anayltics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
+  </span>
+
+</div>
+:::
