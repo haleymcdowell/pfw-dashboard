@@ -141,7 +141,7 @@ Plot.plot({
 <div style="background-color: #333; color: white; border-radius: 10px; padding: 10px; display: flex; align-items: center">
 
   <span style="font-size: 1vw; width: 100%;">
-    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Analytics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
+    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Analytics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).All data is from [ebird.org](https://ebird.org).
   </span>
 
 </div>
