@@ -58,12 +58,16 @@ recent_obs_df <-
 recent_obs_df |>
   select(comName, obsDt, locName, howMany) |>
   gt() |>
+  tab_header(
+    title = md("**Recent Bird Sightings**")) |>
   cols_label(
     comName = md("**Common Name**"),
     obsDt = md("**Date**"),
     locName = md("**Location**"),
-    howMany = md("**Number of Observations**")
-  )
+    howMany = md("**Number Observed**")
+  ) |>
+  fmt_number(columns = howMany, decimals = 0) |>
+  fmt_date(columns = obsDt, date_style = "yMd")
   
 ```
 
@@ -78,7 +82,7 @@ recent_obs_df |>
 ojs_define(recent_obs_ojs = recent_obs_df)
 ```
 
-```{ojs}
+```{ojs, createLocDropdown}
 //| expandable: false
 // Transpose the data to make it usable in ojs.
 recent_observations = transpose(recent_obs_ojs)
@@ -95,7 +99,7 @@ viewof locNameDropdown = Inputs.select(
 
 ### Row {.row2}
 
-```{ojs}
+```{ojs, createBarChart}
 //| expandable: false
 
 // Filter to only the location selected from the dropdown.
@@ -103,10 +107,11 @@ filtered_observations = recent_observations.filter(d => d.locName === locNameDro
 
 // Create a horizontal bar graph using Observable Plot.
 Plot.plot({
+  title: "Recent Observations for " + locNameDropdown,
   marginLeft: 150,
-  height: filtered_observations.length * 25 + 75,
+  height: filtered_observations.length * 25 + 100,
   x: {
-    label: "Number of Observations"
+    label: "Number Observed"
   },
   y: {
     label: "Species Common Name"
@@ -127,17 +132,8 @@ Plot.plot({
       fill: "#fff",
       textAnchor: "start",
     }),
-    Plot.text([{}], {
-      x: 0,
-      y: filtered_observations[0]?.comName,
-      text: () => "Observations for" + locNameDropdown,
-      dy: -30,
-      fontSize: 30,
-      anchor: "start"
-    }),
   ]
 })
-
 ```
 
 ### Row {.row3}
