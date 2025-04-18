@@ -14,9 +14,6 @@ format:
 library(tidyverse)
 library(httr2)
 library(gt)
-library(jsonlite)
-library(ggplot2)
-library(reshape2)
 ```
 
 
@@ -73,7 +70,7 @@ recent_obs_df |>
 
 ## Column2 {width = "65%"}
 
-### Row 
+### Row {.row1}
 
 ```{r, sendtoojs}
 #| echo: false
@@ -96,7 +93,7 @@ viewof locNameDropdown = Inputs.select(
 )
 ```
 
-### Row 
+### Row {.row2}
 
 ```{ojs}
 //| expandable: false
@@ -104,11 +101,10 @@ viewof locNameDropdown = Inputs.select(
 // Filter to only the location selected from the dropdown.
 filtered_observations = recent_observations.filter(d => d.locName === locNameDropdown)
 
-// Create a horizontal bar graph.
+// Create a horizontal bar graph using Observable Plot.
 Plot.plot({
-  title: "Recent Observations for " + locNameDropdown,
   marginLeft: 150,
-  height: filtered_observations.length * 25,
+  height: filtered_observations.length * 25 + 75,
   x: {
     label: "Number of Observations"
   },
@@ -130,18 +126,26 @@ Plot.plot({
       dy: 0,
       fill: "#fff",
       textAnchor: "start",
-    })
+    }),
+    Plot.text([{}], {
+      x: 0,
+      y: filtered_observations[0]?.comName,
+      text: () => "Observations for" + locNameDropdown,
+      dy: -30,
+      fontSize: 30,
+      anchor: "start"
+    }),
   ]
 })
 
 ```
 
-### Row 
+### Row {.row3}
 :::{.card expandable="false"}
-<div style="background-color: #333; color: white; border-radius: 10px; padding: 10px; text-align: center; display: flex; align-items: center; justify-content: center; height: 30%;">
+<div style="background-color: #333; color: white; border-radius: 10px; padding: 10px; display: flex; align-items: center">
 
   <span style="font-size: 1vw; width: 100%;">
-    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Anayltics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
+    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Analytics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
   </span>
 
 </div>

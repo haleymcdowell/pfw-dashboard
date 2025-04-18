@@ -1,11 +1,6 @@
 ---
-title: "pfw-dashboard"
+title: "Birds of Genesee County, Michigan"
 ---
 
-This is a Quarto website.
+This interactive dashboard utilizes ebird.org data to delve into the bird populations of Genesee County, Michigan.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
