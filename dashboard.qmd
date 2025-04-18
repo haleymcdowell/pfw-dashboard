@@ -108,7 +108,7 @@ viewof locNameDropdown = Inputs.select(
 Plot.plot({
   marks: [
   Plot.barX(
-  filtered_loc,
+  recent_observations,
   {x: "howMany", y: "comName", sort:{y: "x", reverse: true}})
   ],
   marginLeft: 200,
