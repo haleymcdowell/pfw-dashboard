@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Exploring Birds of North America"
+  title: "Exploring Birds of Genesee County, Michigan"
   sidebar:
     contents:
       - href: index.qmd
@@ -10,12 +10,13 @@ website:
       - href: about.qmd
         text: About
       - href: dashboard.qmd
-        text: Recent Sightings Dashboard
+        text: Dashboard
 
 format:
   html:
     theme: [yeti, custom.scss]
     toc: true
+    layout: grid
 
 
 
