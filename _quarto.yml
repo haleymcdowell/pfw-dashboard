@@ -12,8 +12,6 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About
       - href: dashboard.qmd
         text: Recent Sightings
       - href: notable_obs.qmd
@@ -25,7 +23,7 @@ format:
     theme: [yeti, custom.scss]
     toc: true
     grid: 
-      sidebar-width: 150px
+      sidebar-width: 175px
       
 
 

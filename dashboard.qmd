@@ -30,27 +30,8 @@ recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI-049/recent") |>
   req_perform() |>
   resp_body_json()
 
-# Create dataframe of recent observations.
-recent_obs_df <- as.data.frame(do.call(rbind, recent_obs))
-
-# Convert lists to vectors
-recent_obs_df <- 
-  recent_obs_df |>
-  mutate(speciesCode = as.vector(unlist(recent_obs_df$speciesCode))) |>
-  mutate(comName = as.vector(unlist(recent_obs_df$comName))) |>
-  mutate(sciName = as.vector(unlist(recent_obs_df$sciName))) |>
-  mutate(locId = as.vector(unlist(recent_obs_df$locId))) |>
-  mutate(locName = as.vector(unlist(recent_obs_df$locName))) |>
-  mutate(obsDt = as.vector(unlist(recent_obs_df$obsDt))) |>
-  mutate(howMany = as.vector(unlist(recent_obs_df$howMany))) |>
-  mutate(speciesCode = as.vector(unlist(recent_obs_df$speciesCode))) |>
-  mutate(lat = as.vector(unlist(recent_obs_df$lat))) |>
-  mutate(lng = as.vector(unlist(recent_obs_df$lng))) |>
-  mutate(obsValid = as.vector(unlist(recent_obs_df$obsValid))) |>
-  mutate(obsReviewed = as.vector(unlist(recent_obs_df$obsReviewed))) |>
-  mutate(locationPrivate = as.vector(unlist(recent_obs_df$locationPrivate))) |>
-  mutate(subId = as.vector(unlist(recent_obs_df$subId))) |>
-  mutate(exoticCategory = as.vector(unlist(recent_obs_df$exoticCategory)))
+# Convert to tibble
+recent_obs_df <- map_dfr(recent_obs, ~ as_tibble(.x))
 ```
 
 ```{r, createtable}
@@ -98,7 +79,8 @@ viewof locNameDropdown = Inputs.select(
   recent_observations.map(d => d.locName),
   {
     label: "Choose a location",
-    unique: true
+    unique: true,
+    sort: true
     }
 )
 ```

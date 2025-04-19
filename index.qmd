@@ -2,5 +2,13 @@
 title: "Birds of Genesee County, Michigan"
 ---
 
-This interactive dashboard utilizes ebird.org data to delve into the bird populations of Genesee County, Michigan.
+My name is Haley McDowell. I am a graduate student at Oakland University pursuing my Master's Degree in Business Analytics.
+
+This dashboard site was created for my MIS 5470 Practical Computing for Data Analytics final course project. It utilizes the [ebird.org](https://ebird.org) public web API to pull recent bird sightings located near Genesee County, Michigan into an interactive dashboard.
+
+The bones of this dashboard were created with help from the fantastic tutorial series on creating Quarto dashboards in R and publishing them via GitHub Pages and GitHub Actions by Melissa Van Bussel. Her series can be found [here](https://melissavanbussel.github.io/spotify-dashboard/tutorial.html). Her dashboard site can be viewed [here](https://melissavanbussel.github.io/spotify-dashboard/).
+
+Packages used in the creation of this dashboard include Observable Plot, gt, httr2, and tidyverse.
+
+The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
 

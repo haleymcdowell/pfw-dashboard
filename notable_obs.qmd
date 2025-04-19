@@ -31,57 +31,27 @@ notable_obs <- request("https://api.ebird.org/v2/data/obs/US-MI/recent/notable")
   ) |> 
   req_perform() |>
   resp_body_json()
+```
 
-# Create dataframe of recent observations.
-notable_obs_df <- as.data.frame(do.call(rbind, notable_obs))
-
-# Convert lists to vectors
-notable_obs_df <-
-  notable_obs_df |>
-  mutate(speciesCode = as.vector(unlist(notable_obs_df$speciesCode))) |>
-  mutate(comName = as.vector(unlist(notable_obs_df$comName))) |>
-  mutate(sciName = as.vector(unlist(notable_obs_df$sciName))) |>
-  mutate(locId = as.vector(unlist(notable_obs_df$locId))) |>
-  mutate(locName = as.vector(unlist(notable_obs_df$locName))) |>
-  mutate(obsDt = as.vector(unlist(notable_obs_df$obsDt))) |>
-  mutate(howMany = as.vector(unlist(notable_obs_df$howMany))) |>
-  mutate(lat = as.vector(unlist(notable_obs_df$lat))) |>
-  mutate(lng = as.vector(unlist(notable_obs_df$lng))) |>
-  # mutate(obsValid = as.vector(unlist(notable_obs_df$obsValid))) |>
-  # mutate(obsReviewed = as.vector(unlist(notable_obs_df$obsReviewed))) |>
-  # mutate(locationPrivate = as.vector(unlist(notable_obs_df$locationPrivate))) |>
-  # mutate(subId = as.vector(unlist(notable_obs_df$subId))) |>
-  # mutate(exoticCategory = as.vector(unlist(notable_obs_df$exoticCategory))) |>
-  mutate(subnational2Code = as.vector(unlist(notable_obs_df$subnational2Code))) |>
-  mutate(subnational2Name = as.vector(unlist(notable_obs_df$subnational2Name))) |>
-  mutate(subnational1Code = as.vector(unlist(notable_obs_df$subnational1Code))) |>
-  mutate(subnational1Name = as.vector(unlist(notable_obs_df$subnational1Name))) |>
-  mutate(countryCode = as.vector(unlist(notable_obs_df$countryCode))) |>
-  mutate(countryName = as.vector(unlist(notable_obs_df$countryName))) |>
-  # mutate(userDisplayName = as.vector(unlist(notable_obs_df$userDisplayName))) |>
-  # mutate(obsId = as.vector(unlist(notable_obs_df$obsId))) |>
-  # mutate(checklistId = as.vector(unlist(notable_obs_df$checklistId))) |>
-  # mutate(presenceNoted = as.vector(unlist(notable_obs_df$presenceNoted))) |>
-  # mutate(hasComments = as.vector(unlist(notable_obs_df$hasComments))) |>
-  # mutate(evidence = as.vector(unlist(notable_obs_df$evidence))) |>
-  # mutate(hasRichMedia = as.vector(unlist(notable_obs_df$hasRichMedia))) |>
-  # mutate(firstName = as.vector(unlist(notable_obs_df$firstName))) |>
-  # mutate(lastName = as.vector(unlist(notable_obs_df$lastName))) |>
-  select(1:9, 15:20)
+```{r}
+# Convert to tibble
+notable_obs_df <- map_dfr(notable_obs, ~ as_tibble(.x))
 
 ```
+
+
 
 ```{r, createtable}
 # Create dashboard table
 notable_obs_df |>
-  select(comName, obsDt, subnational2Code, locName, howMany) |>
+  select(comName, obsDt, subnational2Name, locName, howMany) |>
   gt() |>
   tab_header(
     title = md("**Notable Bird Sightings**")) |>
   cols_label(
     comName = md("**Common Name**"),
     obsDt = md("**Date**"),
-    subnational2Code = md("**County**"),
+    subnational2Name = md("**County**"),
     locName = md("**Location**"),
     howMany = md("**Number Observed**")
   ) |>
@@ -113,10 +83,11 @@ notable_observations = transpose(notable_obs_ojs)
 
 // Create a dropdown menu of the county name.
 viewof countyDropdown = Inputs.select(
-  notable_observations.map(d => d.subnational2Code),
+  notable_observations.map(d => d.subnational2Name),
   {
     label: "Choose a county",
-    unique: true
+    unique: true,
+    sort: true
     }
 )
 ```
@@ -127,7 +98,7 @@ viewof countyDropdown = Inputs.select(
 //| expandable: false
 
 // Filter to only the county selected from the dropdown.
-filtered_county = notable_observations.filter(d => d.subnational2Code === countyDropdown);
+filtered_county = notable_observations.filter(d => d.subnational2Name === countyDropdown);
 
 // Create a horizontal bar graph using Observable Plot.
 Plot.plot({
@@ -141,8 +112,25 @@ Plot.plot({
     label: "Species Common Name"
   },
   marks: [
-    Plot.barX(filtered_county, {Plot.groupY({x: "sum"}, {y: "comName", x: "howMany"}))}
-      
+    Plot.barX(filtered_county, 
+      Plot.groupY(
+      {x: "sum"}, 
+      {y: "comName", 
+      x: "howMany",
+      sort: { y: "x", reverse: true },
+      fill: "#888"})),
+    Plot.text(filtered_county, // Add data labels
+      Plot.groupY(
+      {x: "sum"}, 
+      {y: "comName", 
+      x: "howMany",
+      text: d => d3.sum(d.map(x => x.howMany)),
+      dx: -17,
+      dy: 0,
+      fill: "#fff",
+      textAnchor: "start",
+    })),
+      ]
 })
 ```
 
