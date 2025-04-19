@@ -1,0 +1,160 @@
+---
+title: "Notable Observations"
+format:
+  dashboard: 
+    logo: "images/logo.png"
+    orientation: columns
+---
+
+## Column1 {width = "35%"}
+
+```{r, loadpackages}
+#| echo: false
+#| include: false
+library(tidyverse)
+library(httr2)
+library(gt)
+```
+
+```{r, getrecentobservations}
+
+#Define ebird API key.
+api_key <- Sys.getenv("api_key")
+
+#API Call
+notable_obs <- request("https://api.ebird.org/v2/data/obs/US-MI/recent/notable") |> 
+  req_url_query(
+    detail = "full",
+  ) |> 
+  req_headers(
+    `X-eBirdApiToken` = api_key,
+  ) |> 
+  req_perform() |>
+  resp_body_json()
+
+# Create dataframe of recent observations.
+notable_obs_df <- as.data.frame(do.call(rbind, notable_obs))
+
+# Convert lists to vectors
+notable_obs_df <-
+  notable_obs_df |>
+  mutate(speciesCode = as.vector(unlist(notable_obs_df$speciesCode))) |>
+  mutate(comName = as.vector(unlist(notable_obs_df$comName))) |>
+  mutate(sciName = as.vector(unlist(notable_obs_df$sciName))) |>
+  mutate(locId = as.vector(unlist(notable_obs_df$locId))) |>
+  mutate(locName = as.vector(unlist(notable_obs_df$locName))) |>
+  mutate(obsDt = as.vector(unlist(notable_obs_df$obsDt))) |>
+  mutate(howMany = as.vector(unlist(notable_obs_df$howMany))) |>
+  mutate(lat = as.vector(unlist(notable_obs_df$lat))) |>
+  mutate(lng = as.vector(unlist(notable_obs_df$lng))) |>
+  # mutate(obsValid = as.vector(unlist(notable_obs_df$obsValid))) |>
+  # mutate(obsReviewed = as.vector(unlist(notable_obs_df$obsReviewed))) |>
+  # mutate(locationPrivate = as.vector(unlist(notable_obs_df$locationPrivate))) |>
+  # mutate(subId = as.vector(unlist(notable_obs_df$subId))) |>
+  # mutate(exoticCategory = as.vector(unlist(notable_obs_df$exoticCategory))) |>
+  mutate(subnational2Code = as.vector(unlist(notable_obs_df$subnational2Code))) |>
+  mutate(subnational2Name = as.vector(unlist(notable_obs_df$subnational2Name))) |>
+  mutate(subnational1Code = as.vector(unlist(notable_obs_df$subnational1Code))) |>
+  mutate(subnational1Name = as.vector(unlist(notable_obs_df$subnational1Name))) |>
+  mutate(countryCode = as.vector(unlist(notable_obs_df$countryCode))) |>
+  mutate(countryName = as.vector(unlist(notable_obs_df$countryName))) |>
+  # mutate(userDisplayName = as.vector(unlist(notable_obs_df$userDisplayName))) |>
+  # mutate(obsId = as.vector(unlist(notable_obs_df$obsId))) |>
+  # mutate(checklistId = as.vector(unlist(notable_obs_df$checklistId))) |>
+  # mutate(presenceNoted = as.vector(unlist(notable_obs_df$presenceNoted))) |>
+  # mutate(hasComments = as.vector(unlist(notable_obs_df$hasComments))) |>
+  # mutate(evidence = as.vector(unlist(notable_obs_df$evidence))) |>
+  # mutate(hasRichMedia = as.vector(unlist(notable_obs_df$hasRichMedia))) |>
+  # mutate(firstName = as.vector(unlist(notable_obs_df$firstName))) |>
+  # mutate(lastName = as.vector(unlist(notable_obs_df$lastName))) |>
+  select(1:9, 15:20)
+
+```
+
+```{r, createtable}
+# Create dashboard table
+notable_obs_df |>
+  select(comName, obsDt, subnational2Code, locName, howMany) |>
+  gt() |>
+  tab_header(
+    title = md("**Notable Bird Sightings**")) |>
+  cols_label(
+    comName = md("**Common Name**"),
+    obsDt = md("**Date**"),
+    subnational2Code = md("**County**"),
+    locName = md("**Location**"),
+    howMany = md("**Number Observed**")
+  ) |>
+  fmt_number(columns = howMany, decimals = 0) |>
+  fmt_date(columns = obsDt, date_style = "yMd") |>
+  tab_source_note(
+    source_note = md("**Source: [ebird.org](https://ebird.org) Web API**")
+  ) |>
+  tab_options(
+    table.font.size = px(14)
+  )
+  
+```
+
+## Column2 {width = "65%"}
+
+### Row {.row6}
+
+```{r, sendtoojs}
+#| echo: false
+#| include: false
+ojs_define(notable_obs_ojs = notable_obs_df)
+```
+
+```{ojs, createCountyDropdown}
+//| expandable: false
+// Transpose the data to make it usable in ojs.
+notable_observations = transpose(notable_obs_ojs)
+
+// Create a dropdown menu of the county name.
+viewof countyDropdown = Inputs.select(
+  notable_observations.map(d => d.subnational2Code),
+  {
+    label: "Choose a county",
+    unique: true
+    }
+)
+```
+
+### Row {.row4}
+
+```{ojs, createBarChart}
+//| expandable: false
+
+// Filter to only the county selected from the dropdown.
+filtered_county = notable_observations.filter(d => d.subnational2Code === countyDropdown);
+
+// Create a horizontal bar graph using Observable Plot.
+Plot.plot({
+  title: "Notable Observations for " + countyDropdown + " County",
+  marginLeft: 175,
+  height: filtered_county.length * 5 + 100,
+  x: {
+    label: "Number Observed"
+  },
+  y: {
+    label: "Species Common Name"
+  },
+  marks: [
+    Plot.barX(filtered_county, {Plot.groupY({x: "sum"}, {y: "comName", x: "howMany"}))}
+      
+})
+```
+
+### Row {.row5}
+:::{.card expandable="false"}
+<div style="background-color: #333; color: white; border-radius: 10px; padding: 10px; display: flex; align-items: center">
+
+  <span style="font-size: 1vw; width: 100%;">
+    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Analytics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
+  </span>
+
+</div>
+:::
+
+

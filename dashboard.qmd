@@ -67,7 +67,13 @@ recent_obs_df |>
     howMany = md("**Number Observed**")
   ) |>
   fmt_number(columns = howMany, decimals = 0) |>
-  fmt_date(columns = obsDt, date_style = "yMd")
+  fmt_date(columns = obsDt, date_style = "yMd") |>
+  tab_source_note(
+    source_note = md("**Source: [ebird.org](https://ebird.org) Web API**")
+  ) |>
+  tab_options(
+    table.font.size = px(14)
+  )
   
 ```
 
@@ -87,7 +93,7 @@ ojs_define(recent_obs_ojs = recent_obs_df)
 // Transpose the data to make it usable in ojs.
 recent_observations = transpose(recent_obs_ojs)
 
-// Create a dropdown menu of the species common name.
+// Create a dropdown menu of the location name.
 viewof locNameDropdown = Inputs.select(
   recent_observations.map(d => d.locName),
   {
@@ -127,7 +133,7 @@ Plot.plot({
       x: "howMany",
       y: "comName",
       text: d => d.howMany,
-      dx: -10,
+      dx: -15,
       dy: 0,
       fill: "#fff",
       textAnchor: "start",
@@ -141,7 +147,7 @@ Plot.plot({
 <div style="background-color: #333; color: white; border-radius: 10px; padding: 10px; display: flex; align-items: center">
 
   <span style="font-size: 1vw; width: 100%;">
-    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Analytics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).All data is from [ebird.org](https://ebird.org).
+    This dashboard was created by Haley McDowell for Oakland University MIS 5470 Winter 2025 Practical Computing for Data Analytics course Final Project.<br> The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
   </span>
 
 </div>
