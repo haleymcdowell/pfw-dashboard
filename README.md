@@ -2,7 +2,7 @@
 
 The following was created for my Oakland University MIS 5470 Practical Computing for Data Analytics course final project.
 
-This project aimed to use R to create a website for exploring area bird sightings.
+This project aimed to use R to create a Quarto website for exploring area bird sightings.
 
 All data contained in this project was obtained from the [ebird.org](https://ebird.org/home) Web API. The Cornell Lab of Ornithology and National Audobon Society began ebird.org to allow users worldwide to document bird sightings. For this particular project, I only included Michigan data.
 
