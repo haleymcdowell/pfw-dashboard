@@ -15,7 +15,7 @@ library(httr2)
 library(gt)
 ```
 
-```{r, getrecentobservations}
+```{r, getnotableobservations}
 
 #Define ebird API key.
 api_key <- Sys.getenv("api_key")
@@ -103,7 +103,7 @@ viewof countyDropdown = Inputs.select(
 // Filter to only the county selected from the dropdown.
 filtered_county = notable_observations.filter(d => d.subnational2Name === countyDropdown);
 
-// Create a horizontal bar graph using Observable Plot.
+// Create a horizontal bar chart using Observable Plot.
 Plot.plot({
   title: "Notable Observations for " + countyDropdown + " County",
   marginLeft: 175,
