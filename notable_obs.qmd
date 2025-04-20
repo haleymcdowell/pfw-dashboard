@@ -2,9 +2,7 @@
 title: "Notable Observations in Michigan"
 format:
   dashboard: 
-    logo: "images/logo.png"
     orientation: columns
-    navbar: false
 ---
 
 ## Column1 {width = "35%"}
@@ -106,6 +104,7 @@ Plot.plot({
   title: "Notable Observations for " + countyDropdown + " County",
   marginLeft: 175,
   height: filtered_county.length * 5 + 100,
+  width: undefined,
   x: {
     label: "Number Observed"
   },

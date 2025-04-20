@@ -7,6 +7,7 @@ website:
   page-navigation: true
   navbar: 
     search: true
+    collapse: true
     logo: "images/logo.png"
     left: 
       - href: index.qmd

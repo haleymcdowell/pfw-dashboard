@@ -3,8 +3,6 @@ title: "Recent Bird Sightings in Genesee County, Michigan"
 format: 
   dashboard:
     orientation: columns
-    logo: images/logo.png
-    navbar: false
 ---
 
 ## Column1 {width = "35%"}
@@ -99,6 +97,7 @@ Plot.plot({
   title: "Recent Observations for " + locNameDropdown,
   marginLeft: 150,
   height: filtered_observations.length * 25 + 100,
+  width: undefined,
   x: {
     label: "Number Observed"
   },
