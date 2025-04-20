@@ -11,3 +11,5 @@ The bones of this dashboard were created with help from the fantastic tutorial s
 Packages used in the creation of this dashboard include Observable Plot, gt, httr2, and tidyverse.
 
 The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
+
+<iframe src="https://macaulaylibrary.org/asset/634051406/embed" height="507" width="640" frameborder="0" allowfullscreen></iframe>
