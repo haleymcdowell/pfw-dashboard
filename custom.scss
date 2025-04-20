@@ -482,11 +482,11 @@ label,
   height: 12vh;
 }
 
+.navbar-title {
+  font-weight: bold;
+}
+
 // Maintain aspect aspect-ratio
 .gt_table img {
   object-fit: contain;
-}
-
-.navbar-title {
-  font-weight: bold;
 }

@@ -1,9 +1,10 @@
 ---
-title: "Recent Sightings in Genesee County, Michigan"
+title: "Recent Bird Sightings in Genesee County, Michigan"
 format: 
   dashboard:
-    logo: "images/logo.png"
     orientation: columns
+    logo: images/logo.png
+    navbar: false
 ---
 
 ## Column1 {width = "35%"}
@@ -40,7 +41,7 @@ recent_obs_df |>
   select(comName, obsDt, locName, howMany) |>
   gt() |>
   tab_header(
-    title = md("**Recent Bird Sightings**")) |>
+    title = md("**Recent Bird Sightings - Genesee County, MI**")) |>
   cols_label(
     comName = md("**Common Name**"),
     obsDt = md("**Date**"),
@@ -134,3 +135,4 @@ Plot.plot({
 
 </div>
 :::
+
