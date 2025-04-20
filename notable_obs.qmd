@@ -1,5 +1,5 @@
 ---
-title: "Notable Observations"
+title: "Notable Observations in Michigan"
 format:
   dashboard: 
     logo: "images/logo.png"

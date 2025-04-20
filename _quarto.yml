@@ -2,10 +2,20 @@ project:
   type: website
 
 website:
-  title: "Exploring Birds of Genesee County, Michigan"
+  title: "Exploring Birds of Michigan"
   favicon: images/logo.png
   page-navigation: true
+  navbar: 
+    search: true
+    left: 
+      - href: index.qmd
+        text: Home
+      - href: dashboard.qmd
+        text: Recent Sightings
+      - href: notable_obs.qmd
+        text: Notable Observations
   sidebar:
+    style: "docked"
     search: true
     collapse-level: 1
     logo: images/logo.png
@@ -23,7 +33,7 @@ format:
     theme: [yeti, custom.scss]
     toc: true
     grid: 
-      sidebar-width: 175px
+      sidebar-width: 250px
       
 
 
