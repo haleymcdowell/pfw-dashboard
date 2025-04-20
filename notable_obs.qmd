@@ -72,11 +72,15 @@ notable_obs_df |>
 ```{r, sendtoojs}
 #| echo: false
 #| include: false
+
+# The R tibble must be passed to Observable JavaScript before it can be accessed in
+# an OJS cell.
 ojs_define(notable_obs_ojs = notable_obs_df)
 ```
 
 ```{ojs, createCountyDropdown}
 //| expandable: false
+
 // Transpose the data to make it usable in ojs.
 notable_observations = transpose(notable_obs_ojs)
 
@@ -85,8 +89,8 @@ viewof countyDropdown = Inputs.select(
   notable_observations.map(d => d.subnational2Name),
   {
     label: "Choose a county",
-    unique: true,
-    sort: true
+    unique: true, // Only include each location once.
+    sort: true // Sort the options alphabetically.
     }
 )
 ```
@@ -114,12 +118,13 @@ Plot.plot({
   marks: [
     Plot.barX(filtered_county, 
       Plot.groupY(
-      {x: "sum"}, 
+      {x: "sum"}, // Take the sum of the howMany values for each species.
       {y: "comName", 
       x: "howMany",
-      sort: { y: "x", reverse: true },
+      sort: { y: "x", reverse: true }, // Sort data largest to smallest.
       fill: "#888"})),
-    Plot.text(filtered_county, // Add data labels
+    // Add data labels
+    Plot.text(filtered_county, 
       Plot.groupY(
       {x: "sum"}, 
       {y: "comName", 

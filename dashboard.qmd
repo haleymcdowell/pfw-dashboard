@@ -65,11 +65,15 @@ recent_obs_df |>
 ```{r, sendtoojs}
 #| echo: false
 #| include: false
+
+# The R tibble must be passed to Observable JavaScript before it can be accessed in
+# an OJS cell.
 ojs_define(recent_obs_ojs = recent_obs_df)
 ```
 
 ```{ojs, createLocDropdown}
 //| expandable: false
+
 // Transpose the data to make it usable in ojs.
 recent_observations = transpose(recent_obs_ojs)
 
@@ -78,8 +82,8 @@ viewof locNameDropdown = Inputs.select(
   recent_observations.map(d => d.locName),
   {
     label: "Choose a location",
-    unique: true,
-    sort: true
+    unique: true, // Only include each location once.
+    sort: true // Sort the options alphabetically.
     }
 )
 ```
@@ -108,13 +112,14 @@ Plot.plot({
     Plot.barX(filtered_observations, {
       x: "howMany",
       y: "comName",
-      sort: { y: "x", reverse: true },
+      sort: { y: "x", reverse: true }, // Sort data largest to smallest.
       fill: "#888"
     }),
+    // Add data labels.
    Plot.text(filtered_observations, {
       x: "howMany",
       y: "comName",
-      text: d => d.howMany,
+      text: d => d.howMany, 
       dx: -15,
       dy: 0,
       fill: "#fff",
