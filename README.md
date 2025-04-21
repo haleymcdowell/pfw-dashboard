@@ -12,7 +12,7 @@ The bones of this dashboard were created with help from the fantastic tutorial s
 
 Packages used in the creation of this dashboard include Observable Plot, gt, httr2, and tidyverse.
 
-The GitHub repository can be found [here](https://github.com/haleymcdowell/pfw-dashboard)
+The GitHub repository can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
 
 # Significant Files
 **index.qmd** - A Quarto document containing the code for the website's [Home](https://haleymcdowell.github.io/pfw-dashboard/) page.<br>
