@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html</loc>
+    <lastmod>2025-05-15T02:29:14.484Z</lastmod>
+  </url>
+  <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/index.html</loc>
-    <lastmod>2025-05-14T02:37:23.191Z</lastmod>
+    <lastmod>2025-05-15T02:29:14.484Z</lastmod>
   </url>
   <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/dashboard.html</loc>
-    <lastmod>2025-05-14T02:37:23.191Z</lastmod>
-  </url>
-  <url>
-    <loc>https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html</loc>
-    <lastmod>2025-05-14T02:37:23.191Z</lastmod>
+    <lastmod>2025-05-15T02:29:14.484Z</lastmod>
   </url>
 </urlset>
