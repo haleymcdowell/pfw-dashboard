@@ -16,6 +16,8 @@ website:
         text: Recent Sightings
       - href: notable_obs.qmd
         text: Notable Observations
+      - href: hotspots.qmd
+        text: Hotspots
   sidebar:
     style: "docked"
     search: true
@@ -28,7 +30,8 @@ website:
         text: Recent Sightings
       - href: notable_obs.qmd
         text: Notable Observations
-        
+      - href: hotspots.qmd
+        text: Hotspots 
 
 format:
   html:

@@ -1,5 +1,5 @@
 ---
-title: "Recent Bird Sightings in Genesee County, Michigan"
+title: "Hotspots"
 format: 
   dashboard:
     orientation: columns
@@ -13,17 +13,24 @@ format:
 library(tidyverse)
 library(httr2)
 library(gt)
-library(tidygeocoder)
+library("rebird")
 ```
 
-
-```{r, getrecentobservations}
+```{r, gethotspots}
 
 #Define ebird API key.
 api_key <- Sys.getenv("api_key")
 
+#Define region.
+region_code <- "US-MI"
+
+#Get hotspots.
+hotspots <- ebirdhotspotlist("US-MI", key = api_key)
+```
+```{r, getsubregionnames}
+
 #API Call
-recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI-049/recent") |> 
+subregions <- request("https://api.ebird.org/v2/ref/region/list/subnational2/US-MI") |> 
   req_headers(
     `X-eBirdApiToken` = api_key,
   ) |> 
@@ -31,33 +38,36 @@ recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI-049/recent") |>
   resp_body_json()
 
 # Convert to tibble
-recent_obs_df <- map_dfr(recent_obs, ~ as_tibble(.x))
+subregions_df <- map_dfr(subregions, ~ as_tibble(.x))
+```
+
+```{r, combinetibbles}
+
+# Combine hotspots and subregions_df on the subnational2Code.
+hotspots_df <- left_join(hotspots, subregions_df, by = c("subnational2Code" = "code"))
 ```
 
 ```{r, createtable}
 # Create dashboard table
-recent_obs_df |>
-  select(comName, obsDt, locName, howMany) |>
+hotspots_df |>
+  select(locName, name, numSpeciesAllTime) |>
+  arrange(desc(numSpeciesAllTime)) |>
   gt() |>
   tab_header(
-    title = md("**Recent Bird Sightings - Genesee County, MI**")) |>
+    title = md("**Hotspots in Michigan**")) |>
   cols_label(
-    comName = md("**Common Name**"),
-    obsDt = md("**Date**"),
     locName = md("**Location**"),
-    howMany = md("**Number Observed**")
+    name = md("**County**"),
+    numSpeciesAllTime = md("**Number of Species Observed**")
   ) |>
-  fmt_number(columns = howMany, decimals = 0) |>
-  fmt_date(columns = obsDt, date_style = "yMd") |>
+  fmt_number(columns = numSpeciesAllTime, decimals = 0) |>
   tab_source_note(
     source_note = md("**Source: [ebird.org](https://ebird.org) Web API**")
   ) |>
   tab_options(
     table.font.size = px(14)
   )
-  
 ```
-
 
 ## Column2 {width = "65%"}
 
@@ -69,24 +79,25 @@ recent_obs_df |>
 
 # The R tibble must be passed to Observable JavaScript before it can be accessed in
 # an OJS cell.
-ojs_define(recent_obs_ojs = recent_obs_df)
+ojs_define(hotspots_ojs = hotspots_df)
 ```
 
-```{ojs, createLocDropdown}
+```{ojs, createCountyDropdown}
 //| expandable: false
 
 // Transpose the data to make it usable in ojs.
-recent_observations = transpose(recent_obs_ojs)
+mi_hotspots = transpose(hotspots_ojs)
 
 // Create a dropdown menu of the location name.
-viewof locNameDropdown = Inputs.select(
-  recent_observations.map(d => d.locName),
+viewof countyNameDropdown = Inputs.select(
+  mi_hotspots.map(d => d.name),
   {
-    label: "Choose a location",
+    label: "Choose a county",
     unique: true, // Only include each location once.
     sort: true // Sort the options alphabetically.
     }
 )
+
 ```
 
 ### Row {.row2}
@@ -94,40 +105,44 @@ viewof locNameDropdown = Inputs.select(
 ```{ojs, createBarChart}
 //| expandable: false
 
-// Filter to only the location selected from the dropdown.
-filtered_observations = recent_observations.filter(d => d.locName === locNameDropdown)
+// Filter to only the county selected from the dropdown.
+filtered_hotspots = mi_hotspots.filter(d => d.name === countyNameDropdown)
 
 // Create a horizontal bar graph using Observable Plot.
 Plot.plot({
-  title: "Recent Observations for " + locNameDropdown,
-  marginLeft: 150,
-  height: filtered_observations.length * 25 + 100,
+  title: "Hotspots for " + countyNameDropdown + " county",
+  marginLeft: 250,
+  height: filtered_hotspots.length * 25 + 100,
   width: undefined,
   x: {
-    label: "Number Observed"
+    label: "Number of Species Observed"
   },
   y: {
-    label: "Species Common Name"
+    label: "Location Name"
   },
   marks: [
-    Plot.barX(filtered_observations, {
-      x: "howMany",
-      y: "comName",
+    Plot.barX(filtered_hotspots, 
+    Plot.groupY(
+      {x: "sum"}, // Take the sum of the numSpeciesAllTime values for each location.
+      {y: "locName", 
+      x: "numSpeciesAllTime",
       sort: { y: "x", reverse: true }, // Sort data largest to smallest.
-      fill: "#888"
-    }),
-    // Add data labels.
-   Plot.text(filtered_observations, {
-      x: "howMany",
-      y: "comName",
-      text: d => d.howMany, 
-      dx: -15,
+      fill: "#888"})),
+    // Add data labels
+    Plot.text(filtered_hotspots, 
+      Plot.groupY(
+      {x: "sum"}, 
+      {y: "locName", 
+      x: "numSpeciesAllTime",
+      text: d => d3.sum(d.map(x => x.numSpeciesAllTime)),
+      dx: -25,
       dy: 0,
       fill: "#fff",
       textAnchor: "start",
-    }),
-  ]
+    })),
+      ]
 })
+     
 ```
 
 ### Row {.row3}
@@ -140,4 +155,3 @@ Plot.plot({
 
 </div>
 :::
-

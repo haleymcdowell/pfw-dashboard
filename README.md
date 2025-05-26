@@ -10,7 +10,7 @@ This code creates Quarto dashboards in R and publishes them via GitHub Pages and
 
 The bones of this dashboard were created with help from the fantastic tutorial series on creating Quarto dashboards in R and publishing them via GitHub Pages and GitHub Actions by Melissa Van Bussel. Her series can be found [here](https://melissavanbussel.github.io/spotify-dashboard/tutorial.html). Her dashboard site can be viewed [here](https://melissavanbussel.github.io/spotify-dashboard/).
 
-Packages used in the creation of this dashboard include Observable Plot, gt, httr2, and tidyverse.
+Packages used in the creation of this dashboard include Observable Plot, gt, httr2, rebird, and tidyverse.
 
 The GitHub repository can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
 
@@ -18,6 +18,7 @@ The GitHub repository can be found [here](https://github.com/haleymcdowell/pfw-d
 **index.qmd** - A Quarto document containing the code for the website's [Home](https://haleymcdowell.github.io/pfw-dashboard/) page.<br>
 **dashboard.qmd** - A Quarto dashboard containing the code for the [Recent Sightings](https://haleymcdowell.github.io/pfw-dashboard/dashboard.html) page of the website. The data in this dashboard is from Genesee County, Michigan only.<br>
 **notable_obs.qmd** - A Quarto dashboard containing the code for the [Notable Observations](https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html) page of the website. The data in this dashboard is from Michigan only.<br>
+**hotspots.qmd*** - A Quarto dashboard containing the code for the [Hotspots](https://haleymcdowell.github.io/pfw-dashboard/hotspots.html) page of the website. The data in this dashboard is from Michigan only. <br>
 **_quarto.yml** - Code specifications for website.<br>
 **custom.scss** - Code for all formatting. <br>
 **publish.yml** - Located in the .github/workflows folder, contains the code for publishing via GitHub Pages and GitHub Actions.
