@@ -462,9 +462,14 @@ label,
   height: 12vh;
 }
 
+.row1a {
+  height: 12vh;
+  margin-top: -12vh;
+}
+
 .row2 {
   height: 55vh;
-  margin-top: -15vh;
+  margin-top: -20vh;
 }
 
 .row3 {
@@ -484,6 +489,11 @@ label,
 
 .row6 {
   height: 12vh;
+}
+
+.row7 {
+  height: 55vh;
+  margin-top: -15vh;
 }
 
 // Make Navigation Bar title text bold

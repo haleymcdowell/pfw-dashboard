@@ -100,7 +100,7 @@ viewof countyNameDropdown = Inputs.select(
 
 ```
 
-### Row {.row2}
+### Row {.row7}
 
 ```{ojs, createBarChart}
 //| expandable: false

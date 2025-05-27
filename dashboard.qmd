@@ -34,6 +34,22 @@ recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI-049/recent") |>
 recent_obs_df <- map_dfr(recent_obs, ~ as_tibble(.x))
 ```
 
+```{r, obtaincityinfo}
+loc_city <- recent_obs_df |> 
+  reverse_geocode(lat = lat, long = lng, method = 'arcgis', 
+                  address = address, full_results = TRUE) |>
+  select(locId, City) |>
+  group_by(locId) |>
+  slice(1) |>
+  ungroup()
+```
+
+```{r, combine tibbles}
+
+recent_obs_df <- left_join(recent_obs_df, loc_city, by = "locId")
+```
+
+
 ```{r, createtable}
 # Create dashboard table
 recent_obs_df |>
@@ -72,15 +88,32 @@ recent_obs_df |>
 ojs_define(recent_obs_ojs = recent_obs_df)
 ```
 
-```{ojs, createLocDropdown}
+```{ojs, createCityDropdown}
 //| expandable: false
 
 // Transpose the data to make it usable in ojs.
 recent_observations = transpose(recent_obs_ojs)
 
 // Create a dropdown menu of the location name.
+viewof cityNameDropdown = Inputs.select(
+  Array.from(new Set(recent_observations.map(d => d.City))),
+  {
+    label: "Choose a city",
+    unique: true, // Only include each location once.
+    sort: true // Sort the options alphabetically.
+    }
+)
+```
+
+### Row{.row1a}
+
+```{ojs, createLocDropdown}
+//| expandable: false
+
+// Create a dropdown menu of the location name.
 viewof locNameDropdown = Inputs.select(
-  recent_observations.map(d => d.locName),
+  Array.from(new Set(recent_observations.filter(d => d.City === cityNameDropdown)
+  .map(d => d.locName))),
   {
     label: "Choose a location",
     unique: true, // Only include each location once.
