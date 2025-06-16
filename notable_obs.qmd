@@ -13,6 +13,7 @@ format:
 library(tidyverse)
 library(httr2)
 library(gt)
+library(tidygeocoder)
 ```
 
 ```{r, getnotableobservations}
@@ -38,7 +39,19 @@ notable_obs_df <- map_dfr(notable_obs, ~ as_tibble(.x))
 
 ```
 
-
+```{r, obtaincityinfo}
+# Reverse geocode to obtain the city from the latitude/longitude coordinates.
+notable_loc_city <- notable_obs_df |> 
+  reverse_geocode(lat = lat, long = lng, method = 'arcgis', 
+                  address = address, full_results = TRUE) |>
+  select(locId, City) |>
+  group_by(locId) |>
+  slice(1) |>
+  ungroup()
+```
+```{r, combinetibbles}
+notable_obs_df <- left_join(notable_obs_df, notable_loc_city, by = "locId")
+```
 
 ```{r, createtable}
 # Create dashboard table
@@ -95,17 +108,34 @@ viewof countyDropdown = Inputs.select(
 )
 ```
 
+### Row {.row6a}
+```{ojs, createCityDropdown}
+//| expandable: false
+
+// Create a dropdown menu of the city name.
+viewof cityNameDropdown = Inputs.select(
+  Array.from(new Set(notable_observations.filter(d => d.subnational2Name === countyDropdown)
+  .map(d => d.City))),
+  {
+    label: "Choose a city",
+    unique: true, // Only include each location once.
+    sort: true // Sort the options alphabetically.
+    }
+)
+```
+
+
 ### Row {.row4}
 
 ```{ojs, createBarChart}
 //| expandable: false
 
 // Filter to only the county selected from the dropdown.
-filtered_county = notable_observations.filter(d => d.subnational2Name === countyDropdown);
+filtered_county = notable_observations.filter(d => d.City === cityNameDropdown);
 
 // Create a horizontal bar chart using Observable Plot.
 Plot.plot({
-  title: "Notable Observations for " + countyDropdown + " County",
+  title: "Notable Observations for " + cityNameDropdown,
   marginLeft: 175,
   height: filtered_county.length * 5 + 100,
   width: undefined,

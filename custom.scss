@@ -458,37 +458,56 @@ label,
 // quarto-scss-analysis-annotation { "origin": null }
 
 // Dashboard layout
+
+// Recent Observations County dropdown
 .row1 {
   height: 12vh;
 }
 
+// Recent Observations City dropdown
 .row1a {
   height: 12vh;
-  margin-top: -12vh;
+  margin-top: -9vh;
 }
 
+// Recent Observations Location dropdown
+.row1b {
+  height: 12vh;
+  margin-top: -17vh;
+}
+
+// Recent Observations chart
 .row2 {
-  height: 55vh;
-  margin-top: -20vh;
+  height: 50vh;
+  margin-top: -21vh;
 }
-
+// Recent Observations card
 .row3 {
   height: 15vh;
   margin-top: 13vh;
 }
 
+// Notable Observations chart
 .row4 {
-  height: 55vh;
-  margin-top: -15vh;
+  height: 50vh;
+  margin-top: -19vh;
 }
 
+// Notable observations card
 .row5 {
   height: 15vh;
-  margin-top: 13vh;
+  margin-top: 11vh;
 }
 
+// Notable Observations County dropdown
 .row6 {
   height: 12vh;
+}
+
+// Notable Observations City dropdown
+.row6a {
+  height: 12vh;
+  margin-top: -11vh;
 }
 
 .row7 {

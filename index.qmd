@@ -12,9 +12,9 @@ Packages used in the creation of this dashboard include Observable Plot, gt, htt
 
 The code for this dashboard can be found [here](https://github.com/haleymcdowell/pfw-dashboard).
 
-The [Recent Sightings](https://haleymcdowell.github.io/pfw-dashboard/dashboard.html) page lists all recent bird sightings in Genesee County, Michigan. There is an option to filter to specific locations within the county.
+The [Recent Sightings](https://haleymcdowell.github.io/pfw-dashboard/dashboard.html) page lists recent bird sightings in Michigan. Per eBird, "Results include only the most recent observation for each species in the region specified." There is an option to filter to specific counties, cities, and locations within the state.
 
-The [Notable Observations](https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html) page displays all notable bird sightings in Michigan from the last 30 days. Per eBird, "Notable observations can be for locally or nationally rare species or are otherwise unusual, e.g. over-wintering birds in a species which is normally only a summer visitor." There is the option to filter to specific counties within the state.
+The [Notable Observations](https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html) page displays all notable bird sightings in Michigan from the last 30 days. Per eBird, "Notable observations can be for locally or nationally rare species or are otherwise unusual, e.g. over-wintering birds in a species which is normally only a summer visitor." There is the option to filter to specific counties and cities within the state.
 
 The [Hotspots](https://haleymcdowell.github.io/pfw-dashboard/hotspots.html) page displays all hotspots in Michigan. Hotspots are locations where a large number of species have been observed. There is an option to filter to specific counties within the state.
 

@@ -1,5 +1,5 @@
 ---
-title: "Recent Bird Sightings in Genesee County, Michigan"
+title: "Recent Michigan Bird Sightings"
 format: 
   dashboard:
     orientation: columns
@@ -23,7 +23,7 @@ library(tidygeocoder)
 api_key <- Sys.getenv("api_key")
 
 #API Call
-recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI-049/recent") |> 
+recent_obs <- request("https://api.ebird.org/v2/data/obs/US-MI/recent") |> 
   req_headers(
     `X-eBirdApiToken` = api_key,
   ) |> 
@@ -35,6 +35,7 @@ recent_obs_df <- map_dfr(recent_obs, ~ as_tibble(.x))
 ```
 
 ```{r, obtaincityinfo}
+# Reverse geocode to obtain the city from the latitude/longitude coordinates.
 loc_city <- recent_obs_df |> 
   reverse_geocode(lat = lat, long = lng, method = 'arcgis', 
                   address = address, full_results = TRUE) |>
@@ -43,10 +44,24 @@ loc_city <- recent_obs_df |>
   slice(1) |>
   ungroup()
 ```
+```{r, obtaincountyinfo}
+# Reverse geocode to obtain the county from the latitude/longitude coordinates.
+
+loc_county <- recent_obs_df |> 
+  reverse_geocode(lat = lat, long = lng, method = 'arcgis', 
+                  address = address, full_results = TRUE) |>
+  select(locId, Subregion) |>
+  group_by(locId) |>
+  slice(1) |>
+  ungroup()
+```
+
 
 ```{r, combine tibbles}
+# Combine the recent observations with the city and county data.
 
 recent_obs_df <- left_join(recent_obs_df, loc_city, by = "locId")
+recent_obs_df <- left_join(recent_obs_df, loc_county, by = "locId")
 ```
 
 
@@ -56,7 +71,7 @@ recent_obs_df |>
   select(comName, obsDt, locName, howMany) |>
   gt() |>
   tab_header(
-    title = md("**Recent Bird Sightings - Genesee County, MI**")) |>
+    title = md("**Recent Michigan Bird Sightings**")) |>
   cols_label(
     comName = md("**Common Name**"),
     obsDt = md("**Date**"),
@@ -88,15 +103,31 @@ recent_obs_df |>
 ojs_define(recent_obs_ojs = recent_obs_df)
 ```
 
-```{ojs, createCityDropdown}
+```{ojs, createCountyDropdown}
 //| expandable: false
 
 // Transpose the data to make it usable in ojs.
 recent_observations = transpose(recent_obs_ojs)
 
-// Create a dropdown menu of the location name.
+// Create a dropdown menu of the county name.
+viewof countyNameDropdown = Inputs.select(
+  Array.from(new Set(recent_observations.map(d => d.Subregion))),
+  {
+    label: "Choose a county",
+    unique: true, // Only include each location once.
+    sort: true // Sort the options alphabetically.
+    }
+)
+```
+
+### Row{.row1a}
+```{ojs, createCityDropdown}
+//| expandable: false
+
+// Create a dropdown menu of the city name.
 viewof cityNameDropdown = Inputs.select(
-  Array.from(new Set(recent_observations.map(d => d.City))),
+  Array.from(new Set(recent_observations.filter(d => d.Subregion === countyNameDropdown)
+  .map(d => d.City))),
   {
     label: "Choose a city",
     unique: true, // Only include each location once.
@@ -105,7 +136,8 @@ viewof cityNameDropdown = Inputs.select(
 )
 ```
 
-### Row{.row1a}
+
+### Row{.row1b}
 
 ```{ojs, createLocDropdown}
 //| expandable: false
