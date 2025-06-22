@@ -3,6 +3,8 @@
 .RData
 .Ruserdata
 .Renviron
+.Rprofile
+.DS_Store
 
 /.quarto/
 /_site/

@@ -54,16 +54,20 @@ notable_obs_df <- left_join(notable_obs_df, notable_loc_city, by = "locId")
 ```
 
 ```{r, createtable}
+# Sort notable_obs_df alphabetically by county.
+notable_obs_df <- notable_obs_df |>
+  arrange(subnational2Name)
+
 # Create dashboard table
 notable_obs_df |>
-  select(comName, obsDt, subnational2Name, locName, howMany) |>
-  gt() |>
+  select(comName, obsDt, City, subnational2Name, locName, howMany) |>
+  gt(groupname_col = "subnational2Name") |>
   tab_header(
     title = md("**Notable Bird Sightings**")) |>
   cols_label(
     comName = md("**Common Name**"),
     obsDt = md("**Date**"),
-    subnational2Name = md("**County**"),
+    City = md("**City**"),
     locName = md("**Location**"),
     howMany = md("**Number Observed**")
   ) |>
@@ -73,7 +77,8 @@ notable_obs_df |>
     source_note = md("**Source: [ebird.org](https://ebird.org) Web API**")
   ) |>
   tab_options(
-    table.font.size = px(14)
+    table.font.size = px(14),
+    row_group.font.weight = "bold" 
   )
   
 ```

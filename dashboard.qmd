@@ -65,16 +65,21 @@ recent_obs_df <- left_join(recent_obs_df, loc_county, by = "locId")
 ```
 
 
-```{r, createtable}
+```{r, createtable1}
+# Sort recent_obs_df alphabetically by county.
+recent_obs_df <- recent_obs_df |>
+  arrange(Subregion)
+
 # Create dashboard table
 recent_obs_df |>
-  select(comName, obsDt, locName, howMany) |>
-  gt() |>
+  select(comName, obsDt, City, locName, howMany, Subregion) |>
+  gt(groupname_col = "Subregion") |>
   tab_header(
     title = md("**Recent Michigan Bird Sightings**")) |>
   cols_label(
     comName = md("**Common Name**"),
     obsDt = md("**Date**"),
+    City = md("**City**"),
     locName = md("**Location**"),
     howMany = md("**Number Observed**")
   ) |>
@@ -84,14 +89,14 @@ recent_obs_df |>
     source_note = md("**Source: [ebird.org](https://ebird.org) Web API**")
   ) |>
   tab_options(
-    table.font.size = px(14)
-  )
-  
+    table.font.size = px(14),
+     row_group.font.weight = "bold" 
+  ) 
+
 ```
 
 
 ## Column2 {width = "65%"}
-
 ### Row {.row1}
 
 ```{r, sendtoojs}
@@ -141,9 +146,10 @@ viewof cityNameDropdown = Inputs.select(
 
 ```{ojs, createLocDropdown}
 //| expandable: false
+//| label: loc-dropdown
 
 // Create a dropdown menu of the location name.
-viewof locNameDropdown = Inputs.select(
+viewof selected_location = Inputs.select(
   Array.from(new Set(recent_observations.filter(d => d.City === cityNameDropdown)
   .map(d => d.locName))),
   {
@@ -160,11 +166,11 @@ viewof locNameDropdown = Inputs.select(
 //| expandable: false
 
 // Filter to only the location selected from the dropdown.
-filtered_observations = recent_observations.filter(d => d.locName === locNameDropdown)
+filtered_observations = recent_observations.filter(d => d.locName === selected_location)
 
 // Create a horizontal bar graph using Observable Plot.
 Plot.plot({
-  title: "Recent Observations for " + locNameDropdown,
+  title: "Recent Observations for " + selected_location,
   marginLeft: 150,
   height: filtered_observations.length * 25 + 100,
   width: undefined,
