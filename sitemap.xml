@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://haleymcdowell.github.io/pfw-dashboard/hotspots.html</loc>
-    <lastmod>2026-09-04T05:20:17.159Z</lastmod>
-  </url>
-  <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html</loc>
-    <lastmod>2026-09-04T05:20:17.159Z</lastmod>
+    <lastmod>2026-09-05T05:10:04.465Z</lastmod>
   </url>
   <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/dashboard.html</loc>
-    <lastmod>2026-09-04T05:20:17.159Z</lastmod>
+    <lastmod>2026-09-05T05:10:04.465Z</lastmod>
   </url>
   <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/index.html</loc>
-    <lastmod>2026-09-04T05:20:17.159Z</lastmod>
+    <lastmod>2026-09-05T05:10:04.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://haleymcdowell.github.io/pfw-dashboard/hotspots.html</loc>
+    <lastmod>2026-09-05T05:10:04.465Z</lastmod>
   </url>
 </urlset>
