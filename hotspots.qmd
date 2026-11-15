@@ -110,7 +110,7 @@ filtered_hotspots = mi_hotspots.filter(d => d.name === countyNameDropdown)
 
 // Create a horizontal bar graph using Observable Plot.
 Plot.plot({
-  title: "Hotspots for " + countyNameDropdown + " county",
+  title: "Hotspots for " + countyNameDropdown + " County",
   marginLeft: 250,
   height: filtered_hotspots.length * 25 + 100,
   width: undefined,

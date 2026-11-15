@@ -1,0 +1,154 @@
+---
+title: "Today's Bird Sightings"
+format: 
+  dashboard:
+    orientation: columns
+---
+
+## Column1 {width = "35%"}
+
+```{r, loadpackages}
+#| echo: false
+#| include: false
+library(tidyverse)
+library(httr2)
+library(gt)
+library(tidygeocoder)
+```
+
+```{r, getdata}
+#Define ebird API key.
+api_key <- Sys.getenv("api_key")
+
+# Define today's date.
+today <- Sys.Date()
+current_year <- format(today, "%Y")
+current_month <- format(today, "%m")
+current_day <- format(today, "%d")
+
+# Define URL.
+url <- sprintf("https://api.ebird.org/v2/data/obs/US-MI/historic/%s/%s/%s", current_year, current_month, current_day)
+
+#API Call
+species_data <- request(url) |> 
+  req_headers(
+    `X-eBirdApiToken` = api_key,
+  ) |> 
+  req_perform() |>
+  resp_body_json()
+  
+
+# Convert to tibble
+species_data_df <- map_dfr(species_data, ~ as_tibble(.x))
+```
+
+```{r, obtaincity}
+
+# Reverse geocode to obtain the city from the latitude/longitude coordinates.
+loc_city <- species_data_df |> 
+  reverse_geocode(lat = lat, long = lng, method = 'arcgis', 
+                  address = address, full_results = TRUE) |>
+  select(locId, City) |>
+  group_by(locId) |>
+  slice(1) |>
+  ungroup()
+```
+
+```{r, obtaincounty}
+
+# Reverse geocode to obtain the county from the latitude/longitude coordinates.
+loc_county <- species_data_df |> 
+  reverse_geocode(lat = lat, long = lng, method = 'arcgis', 
+                  address = address, full_results = TRUE) |>
+  select(locId, Subregion) |>
+  group_by(locId) |>
+  slice(1) |>
+  ungroup()
+```
+
+```{r, combinetibbles}
+
+# Combine the recent observations with the city and county data.
+
+species_data_df <- left_join(species_data_df, loc_city, by = "locId")
+species_data_df <- left_join(species_data_df, loc_county, by = "locId")
+```
+
+
+## Column2 {width = "65%"}
+### Row {.row1}
+
+```{r, sendtoojs}
+#| echo: false
+#| include: false
+
+# The R tibble must be passed to Observable JavaScript before it can be accessed in
+# an OJS cell.
+ojs_define(species_data_ojs = species_data_df)
+```
+
+```{ojs, createSpeciesDropdown}
+//| expandable: false
+
+// Transpose the data to make it usable in ojs.
+species_data_transposed = transpose(species_data_ojs)
+
+// Create a dropdown menu of the species name.
+viewof speciesNameDropdown = Inputs.select(
+  Array.from(new Set(species_data_transposed.map(d => d.comName))),
+  {
+    label: "Choose a species",
+    unique: true, // Only include each location once.
+    sort: true // Sort the options alphabetically.
+    }
+)
+```
+
+
+
+### Row {.row4}
+
+```{ojs}
+us = import("@observablehq/world-atlas@2/us/10m.json")
+```
+
+```{ojs}
+import {feature} from "topojson-client"
+```
+
+
+```{ojs}
+
+filtered_species2 = species_data_transposed
+  .filter(d => d.comName?.trim() === speciesNameDropdown?.trim())
+  .filter(d => typeof d.lat === "number" && typeof d.lng === "number")
+
+```
+
+```{ojs}
+async () => {
+  const usData = await us;
+
+  return Plot.plot({
+    projection: "albers-usa",
+    marks: [
+      Plot.geo(feature(usData, usData.objects.nation), {
+        fill: "#f0f0f0",
+        stroke: "#999"
+      }),
+      Plot.dot(filtered_species, {
+        x: "lng",
+        y: "lat",
+        r: 4,
+        fill: "steelblue",
+        opacity: 0.7,
+        title: d => d.comName
+      })
+    ],
+    height: 500
+  });
+}
+
+```
+
+
