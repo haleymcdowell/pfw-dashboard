@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://haleymcdowell.github.io/pfw-dashboard/dashboard.html</loc>
-    <lastmod>2026-11-15T13:20:53.756Z</lastmod>
-  </url>
-  <url>
-    <loc>https://haleymcdowell.github.io/pfw-dashboard/species_data.html</loc>
-    <lastmod>2026-11-15T13:20:53.758Z</lastmod>
-  </url>
-  <url>
-    <loc>https://haleymcdowell.github.io/pfw-dashboard/hotspots.html</loc>
-    <lastmod>2026-11-15T13:20:53.756Z</lastmod>
-  </url>
-  <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/notable_obs.html</loc>
-    <lastmod>2026-11-15T13:20:53.756Z</lastmod>
+    <lastmod>2026-11-21T07:54:57.550Z</lastmod>
   </url>
   <url>
     <loc>https://haleymcdowell.github.io/pfw-dashboard/index.html</loc>
-    <lastmod>2026-11-15T13:20:53.756Z</lastmod>
+    <lastmod>2026-11-21T07:54:57.550Z</lastmod>
+  </url>
+  <url>
+    <loc>https://haleymcdowell.github.io/pfw-dashboard/dashboard.html</loc>
+    <lastmod>2026-11-21T07:54:57.550Z</lastmod>
+  </url>
+  <url>
+    <loc>https://haleymcdowell.github.io/pfw-dashboard/species_data.html</loc>
+    <lastmod>2026-11-21T07:54:57.551Z</lastmod>
+  </url>
+  <url>
+    <loc>https://haleymcdowell.github.io/pfw-dashboard/hotspots.html</loc>
+    <lastmod>2026-11-21T07:54:57.550Z</lastmod>
   </url>
 </urlset>
